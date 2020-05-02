@@ -13,6 +13,7 @@
 #pragma once
 
 #include <list>
+#include <map>
 #include <mutex>  // NOLINT
 #include <vector>
 
@@ -46,7 +47,16 @@ class ClockReplacer : public Replacer {
   size_t Size() override;
 
  private:
-  // TODO(student): implement me!
+  struct FrameStat {
+    FrameStat() : is_in(false), chances(1) {}
+    bool is_in;
+    int chances;
+  };
+
+  size_t num_pages_;
+  size_t clock_hand_;
+  std::vector<FrameStat> rb_;
+  size_t real_size_;
 };
 
 }  // namespace bustub

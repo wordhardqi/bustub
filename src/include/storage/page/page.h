@@ -78,6 +78,13 @@ class Page {
   /** Zeroes out the data that is held within the page. */
   inline void ResetMemory() { memset(data_, OFFSET_PAGE_START, PAGE_SIZE); }
 
+  inline void ResetAll(page_id_t page_id) {
+    ResetMemory();
+    pin_count_ = 0;
+    is_dirty_ = false;
+    page_id_ = page_id;
+  }
+
   /** The actual data that is stored within a page. */
   char data_[PAGE_SIZE]{};
   /** The ID of this page. */
